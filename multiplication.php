@@ -41,10 +41,7 @@ for ($i = 1&$a=1; $i<=9&$a<=9; $i++&$a++) {
     
   
 };
-// for($a=0;$a<=9;$a++){
-//     echo '<td>' . $a. '</td>';
 
-// };
 echo '</tbody></section> </table>';
 
 
