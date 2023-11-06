@@ -7,6 +7,8 @@
 </head>
 <body>
     <?php
+
+    
     $annee=array("Janvier"=> "31",
                     "Février"=>"28",
                     "Mars"=>"31",
