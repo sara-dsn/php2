@@ -6,12 +6,12 @@
     <title>ok</title>
 </head>
 <body>
-<p>Vous êtes connecté</p>
+
     <?php
     session_start();
-    var_dump($_SESSION['user']);
+    // var_dump($_SESSION['user']);
     
-    echo" Vous êtes connecté ".$_SESSION['prenom'];
+    echo" Vous êtes connecté ".$_SESSION['pr'];
     if($_SESSION["auth"]!=="ok");
     header("Location login-form.php");
     exit();

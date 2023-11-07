@@ -12,25 +12,22 @@
     // var_dump($_SESSION); 
     // var_dump($_REQUEST);
    
-    if ($_SERVER["REQUEST_METHOD"]==="POST"){
+    if (isset($_POST["envoie"])){
         // var_dump($_SESSION);
         $nom=$_POST["nom"];
         $prenom=$_POST["pr"];
         $email=$_POST["m"];
-        $user=$_POST["usr"];
-        $mp=$_POST["mp"];
-
-       
+        $id=$_POST["usr"];
+        $hash_admin = '$2y$10$g9S/Ixog9k0aCBpBSajKyuwftCxznBEgSmXt.lE29yrpibURnQSGu';
+        // $mp=$_POST["mp"];
 
         // echo password_hash($mp);
-
-        $hash_admin = '$2y$10$g9S/Ixog9k0aCBpBSajKyuwftCxznBEgSmXt.lE29yrpibURnQSGu';
-        var_dump($hash_admin);
-        var_dump(password_hash($mp,PASSWORD_DEFAULT));
-        var_dump(password_verify($mp, $hash_admin)) ;
-        echo "<br>";
-
-
+        // var_dump("mon hash admin : ".$hash_admin);
+        // // var_dump("<br><br>le mot de passe que je viens de hash : ".password_hash($mp,PASSWORD_DEFAULT));
+        // var_dump("<br><br>boleen (password_verify):".password_verify($_POST["mp"], $hash_admin)) ;
+        // // $verif=password_verify($mp, $hash_admin);
+        // // var_dump($verif);
+        // echo "<br>";
 
         function a($email) {
             $valid = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/";
@@ -44,17 +41,10 @@
             };
         };
 
-        function b($mp) {
-            $hash_admin = '$2y$10$g9S/Ixog9k0aCBpBSajKyuwftCxznBEgSmXt.lE29yrpibURnQSGu';
-        if (password_verify($mp, $hash_admin)==true ){
-                return true;
-             
-               
-            } else {
-                echo "<p>Mot de passe invalide </p>";
-                return false;
-            };
-        };
+     
+           
+     
+       
 
         function c($nom) {
             $valid ="/^[a-zA-Z]+$/";
@@ -79,21 +69,45 @@
             };
         };
    
-   
+        function e($id) {
+            $valid =  "/^[a-zA-Z]+$/";
     
-        if (d($prenom)==true & a($email)==true & d($mp)==true & c($nom)==true){ 
+            if (preg_match($valid, $id)) {
+                return true;
+               
+            } else {
+                echo "<p>Identifiant invalide</p>";
+                return false;
+            };
+        };
+   
+       
+        if (d($prenom)==true & a($email)==true &  c($nom)==true&e($id)==true &password_verify($_POST["mp"], $hash_admin)){ 
 
             $_SESSION["auth"]="ok";
 
-        $_SESSION['user']=array(
-            "nom"=>array($nom),
-            "prenom"=>array($prenom),
-            "email"=>array($email),
-            // "mp"=>array($mphash),
-        );
+        // $_SESSION['user']=array(
+        //     "nom"=>array($nom),
+        //     "prenom"=>array($prenom),
+        //     "email"=>array($email),
+        //     // "mp"=>array($mphash),
+        // );
 
-        $_SESSION['prenom'] = $prenom;
+        $_SESSION['pr'] = $prenom;
+        $_SESSION['nom'] = $nom;
+        $_SESSION['m'] = $email;
+        $_SESSION['user'] = $id;
+       
+        // if (password_verify($_POST["mp"], $hash_admin)){
+        //     $_SESSION["auth"]="ok";
+        //  return true;
+          
+            
+        //  } else {
+        //      echo "<p>Mot de passe invalide </p>";
+        //      return false;
         
+        //  };
         header("Location: ok.php");
         exit();}
 

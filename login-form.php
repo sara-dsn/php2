@@ -19,7 +19,7 @@
     <br><br>
     <label for="mp" >Mot de passe : </label><input type="text" name="mp">
 
-    <button type="submit" >Envoyer</button>
+    <button type="submit" name="envoie">Envoyer</button>
 </form>
 
 </body>
