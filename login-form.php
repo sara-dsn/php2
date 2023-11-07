@@ -11,11 +11,11 @@
 
     <label for="nom">Nom : </label><input type="text" name="nom" >
     <br><br>
-    <label for="prenom">Prénom : </label><input type="text" name="prenom" >
+    <label for="pr">Prénom : </label><input type="text" name="pr" >
     <br><br>
-    <label for="email">Email : </label><input type="text" name="email" >
+    <label for="m">Email : </label><input type="text" name="m" >
     <br><br>
-    <label for="id">Identifiant : </label><input type="text" name="id" >
+    <label for="usr">Identifiant : </label><input type="text" name="usr" >
     <br><br>
     <label for="mp" >Mot de passe : </label><input type="text" name="mp">
 

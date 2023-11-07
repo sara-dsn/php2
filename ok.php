@@ -9,6 +9,9 @@
 <p>Vous êtes connecté</p>
     <?php
     session_start();
+    var_dump($_SESSION['user']);
+    
+    echo" Vous êtes connecté ".$_SESSION['prenom'];
     if($_SESSION["auth"]!=="ok");
     header("Location login-form.php");
     exit();

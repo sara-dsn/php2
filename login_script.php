@@ -7,80 +7,112 @@
 </head>
 <body>
     <?php
+ 
     session_start();
-    // var_dump($_SESSION);
-    var_dump($_REQUEST);
-    
-    if ($_POST["id"]=="s" && $_POST["mp"]=="s"){
-        $_SESSION["auth"]="ok";
-        var_dump($_SESSION);
-        $email=$_POST["email"];
-        $mp=$_POST["mp"];
+    // var_dump($_SESSION); 
+    // var_dump($_REQUEST);
+   
+    if ($_SERVER["REQUEST_METHOD"]==="POST"){
+        // var_dump($_SESSION);
         $nom=$_POST["nom"];
-        $prenom=$_POST["prenom"];
+        $prenom=$_POST["pr"];
+        $email=$_POST["m"];
+        $user=$_POST["usr"];
+        $mp=$_POST["mp"];
+
+       
+
+        // echo password_hash($mp);
+
+        $hash_admin = '$2y$10$g9S/Ixog9k0aCBpBSajKyuwftCxznBEgSmXt.lE29yrpibURnQSGu';
+        var_dump($hash_admin);
+        var_dump(password_hash($mp,PASSWORD_DEFAULT));
+        var_dump(password_verify($mp, $hash_admin)) ;
+        echo "<br>";
+
+
+
         function a($email) {
-            $valid = "/^([1-9].[a-z])+@([1-9].[a-z])+.{a-z}{2}$/";
+            $valid = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/";
     
             if (preg_match($valid, $email)) {
                 return true;
                
             } else {
-                echo "Adresse mail invalide";
+                echo "<p>Adresse mail invalide</p>";
                 return false;
             };
         };
+
         function b($mp) {
-            $valid = "/^(.[1-9].[a-z].){5}@$/";
-    
-            if (preg_match($valid, $mp)) {
+            $hash_admin = '$2y$10$g9S/Ixog9k0aCBpBSajKyuwftCxznBEgSmXt.lE29yrpibURnQSGu';
+        if (password_verify($mp, $hash_admin)==true ){
                 return true;
+             
                
             } else {
-                echo "Mot de passe invalide entrez au moins 5 caractères";
+                echo "<p>Mot de passe invalide </p>";
                 return false;
             };
         };
+
         function c($nom) {
-            $valid = "/^[a-z].[a-z]{2}$/";
+            $valid ="/^[a-zA-Z]+$/";
     
             if (preg_match($valid, $nom)) {
                 return true;
                
             } else {
-                echo "Nom de famille invalide";
+                echo "<p>Nom de famille invalide</p>";
                 return false;
             };
         };
         function d($prenom) {
-            $valid = "/^[a-z].[a-z]{2}$/";
+            $valid = "/^[a-zA-Z]+$/";
     
             if (preg_match($valid, $prenom)) {
                 return true;
                
             } else {
-                echo "prenom invalide";
+                echo "<p>prenom invalide</p>";
                 return false;
             };
         };
-    }
-        else {
-            unset($_SESSION["auth"]);
-       
-            session_destroy();
-            echo "erreur mp";
-            header("Location: login-form.php");
-            exit();
-        };
-        if ($prenom==true&&$email==true&&$mp==true&&$nom==true){ 
-        $user=array(
+   
+   
+    
+        if (d($prenom)==true & a($email)==true & d($mp)==true & c($nom)==true){ 
+
+            $_SESSION["auth"]="ok";
+
+        $_SESSION['user']=array(
             "nom"=>array($nom),
             "prenom"=>array($prenom),
             "email"=>array($email),
-            "mp"=>array($mp),
+            // "mp"=>array($mphash),
         );
+
+        $_SESSION['prenom'] = $prenom;
+        
         header("Location: ok.php");
-        exit();
-    }
+        exit();}
+
+        else {
+            unset($_SESSION["auth"]);
+            session_destroy();
+            
+         
+            echo "veuillez remplir correctement le formulaire";
+            // header("Location: login-form.php");
+           
+            // exit();
+        };
+
+        // a($email);
+        // b($mp);
+        // c($nom);
+        // d($prenom);
+    };
 
     ?>
 </body>
