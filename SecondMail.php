@@ -1,6 +1,8 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 require_once 'vendor/autoload.php';
 
 $mail= new PHPMailer(true);
@@ -21,8 +23,8 @@ $mail->port =1025;
 $mail->setFrom('entreprise.de.brouette@gmail.com','BrouetteLand');
 
 //destinataire(s)(adresse + nom(falcutatif)):
-$mail->setFrom('client1@gmail.com','mr prospect');
-$mail->setFrom('client2@gmail.com','mme prospect');
+$mail->addAddress('client1@gmail.com','mr prospect');
+$mail->addAddress('client2@gmail.com','mme prospect');
 
 //adresse mail de renvoie de réponse du client(falcutatif)
 $mail->addReplyTo("reponse@acheterUneBrouette.com","reponse");
@@ -49,7 +51,7 @@ if($mail){
         $mail->send();
         echo 'Email envoyé avec succès';}
         catch(exception $e){
-            echo"L'envoie de mail a échoué. L'erreur suivante s'est produite : ", $mail->errorInfo;
+            echo"L'envoie de mail a échoué. L'erreur suivante s'est produite : ", $mail->ErrorInfo;
         }
 }
 
