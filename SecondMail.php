@@ -8,10 +8,10 @@ require_once 'vendor/autoload.php';
 $mail= new PHPMailer(true);
 
 //le smtp (protocole d'envoi de courrier):
-$mail->isSMTP();
+// $mail->isSMTP(); -> ça n'a pas fonctionné ( code 111: connection refusée)
 
 //configuration de l'adresse du serveur SMTP:
-$mail->Host ='localhost';
+$mail->Host ='127.0.0.1';
 
 //désactivation de l'authentification SMTP:
 $mail->SMTPAuth =false;
